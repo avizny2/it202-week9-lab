@@ -1,0 +1,111 @@
+<!-- 
+index.html
+
+Alex Viznytsya
+NetID avizny2
+
+LAB WEEK 9
+
+GitHub: https://github.com/avizny2/it202-week9-lab
+GitPages: https://avizny2.github.io/it202-week9-lab
+
+IT-202, Web and Multimedia Technology
+Fall 2018, UIC
+10/25/2018
+ -->
+
+<!DOCTYPE html>
+<html>
+
+  <head>  
+
+    <title>IT 202, Lab Week 9 </title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script> 
+   
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <style >
+      body {
+        margin: 0px;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <aside class="mdc-drawer mdc-drawer--modal">
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+           <a class="mdc-list-item mdc-list-item--activated" data-file="index.html" href="#" aria-selected="true">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+            <span class="mdc-list-item__text">Home</span>
+          </a>
+          <a class="mdc-list-item" data-file="page1.html" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">web</i>
+            <span class="mdc-list-item__text">Page 1</span>
+          </a>
+          <a class="mdc-list-item"  data-file="page2.html" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">web</i>
+            <span class="mdc-list-item__text">Page 2</span>
+          </a>
+          <a class="mdc-list-item" data-file="page3.html" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">web</i>
+            <span class="mdc-list-item__text">Page 3</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+     
+    <div class="mdc-drawer-scrim"></div>
+      
+    <header class="mdc-top-app-bar mdc-top-app-bar--fixed" id="app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <a href="#" class="material-icons mdc-top-app-bar__navigation-icon">menu</a>
+          <span class="mdc-top-app-bar__title">Lab Week 9</span>
+        </section>
+      </div>
+    </header>
+
+    <div class="mdc-top-app-bar--fixed-adjust" ></div>       
+    
+    <div id="content"></div>
+      
+    <script>
+
+      $(document).ready(function() {
+
+        $("#content").load("home.html");
+
+        window.mdc.autoInit();
+
+        const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+        const topAppBar = mdc.topAppBar.MDCTopAppBar.attachTo(document.getElementById('app-bar'));
+        topAppBar.listen('MDCTopAppBar:nav', () => {
+          drawer.open = !drawer.open;
+        });
+
+        const listEl = document.querySelector('.mdc-drawer .mdc-list');
+        listEl.addEventListener('click', (event) => {
+          drawer.open = false;
+        });
+
+        $(".mdc-list-item").on("click", function(e) {
+          var fileToLoad = $(this).attr("data-file");
+          $("#content").load(fileToLoad);
+        });
+
+      });
+    
+    </script>
+
+  </body>
+    
+</html>
